@@ -22,5 +22,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  background-color: #f0f0f0; /* Set your desired background color */
 }
 </style>
