@@ -47,7 +47,7 @@ export default {
           localStorage.setItem('token', token);
 
           // Redirect to another route after successful login
-          this.$router.push('/login');
+          this.$router.push('/dishes');
         })
         .catch(error => {
           console.error('Login failed:', error);
