@@ -27,7 +27,7 @@
               <input type="password" v-model="confirm_password" class="form-control" id="confirm_password" required>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Register</button>
-            <p class="mt-3">Already have an account? <router-link to="/login">Login</router-link></p>
+            <p class="mt-3">Already have an account? <router-link to="/">Login</router-link></p>
           </form>
         </div>
       </div>
