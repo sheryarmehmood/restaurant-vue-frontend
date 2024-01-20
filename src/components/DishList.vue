@@ -17,54 +17,16 @@
             <td>{{ dish.name }}</td>
             <td>{{ dish.description }}</td>
             <td>
-              <img :src="dish.image_url" alt="Dish Image" style="max-width: 100px; max-height: 100px;">
+              <a :href="getFullImageUrl(dish.image_url)" target="_blank">
+      <img :src="getFullImageUrl(dish.image_url)" alt="Dish Image" style="max-width: 100px; max-height: 100px;">
+    </a>
+              <!-- <img :src="getFullImageUrl(dish.image_url)" alt="Dish Image" style="max-width: 100px; max-height: 100px;"> -->
             </td>
             <td>{{ dish.price }}</td>
           </tr>
         </tbody>
       </table>
   
-      <!-- Display Pagination Links -->
-      <!-- <nav aria-label="Page navigation">
-        <ul class="pagination">
-          <li class="page-item" :class="{ 'disabled': !dishes.prev_page_url }">
-            <a class="page-link" @click.prevent="fetchDishes(dishes.prev_page_url)" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-  
-          <li class="page-item" v-for="page in dishes.last_page" :key="page" :class="{ 'active': page === dishes.current_page }">
-            <a class="page-link" @click.prevent="fetchDishes(page)" href="#">{{ page }}</a>
-          </li>
-  
-          <li class="page-item" :class="{ 'disabled': !dishes.next_page_url }">
-            <a class="page-link" @click.prevent="fetchDishes(dishes.next_page_url)" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav> -->
-      <!-- Display Pagination Links -->
-    <!-- <nav aria-label="Page navigation">
-      <ul class="pagination">
-        <li class="page-item" :class="{ 'disabled': !links.prev_page_url }">
-          <a class="page-link" @click.prevent="fetchDishes(links.current_page - 1)" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-
-        <li class="page-item" v-for="page in links.last_page" :key="page" :class="{ 'active': page === links.current_page }">
-          <a class="page-link" @click.prevent="fetchDishes(page)" href="#">{{ page }}</a>
-        </li>
-
-        <li class="page-item" :class="{ 'disabled': !links.next_page_url }">
-          <a class="page-link" @click.prevent="fetchDishes(links.current_page + 1)" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav> -->
-
 
      <!-- Display Pagination Links -->
      <nav aria-label="Page navigation">
@@ -123,9 +85,10 @@
           .then(response => {
             // console.log('response',response);
             this.dishes = response.data.data.data;
+            console.log('dishes', response.data.data.data);
             this.links = response.data.data;
             // console.log('this.links',this.links);
-            console.log('response.data.data',response.data.data);
+            // console.log('response.data.data',response.data.data);
 
 
           })
@@ -133,6 +96,23 @@
             console.error('Error fetching dishes:', error);
           });
       },
+
+        getFullImageUrl(imageUrl) {
+          console.log('imageUrl',imageUrl);
+            // Replace the base URL with the correct Laravel backend URL
+            // const laravelBaseUrl = 'http://localhost:8000';
+            // const vueBaseUrl = 'http://localhost:8081';
+
+            // // If the image URL contains the Vue.js base URL, replace it with the Laravel backend base URL
+            // if (imageUrl.includes(vueBaseUrl)) {
+            //     return imageUrl.replace(vueBaseUrl, laravelBaseUrl);
+            // }
+
+            return 'http://localhost:8000' + imageUrl;
+            // console.log('imageUrl',imageUrl);
+            // If the image URL doesn't contain the Vue.js base URL, assume it's already the correct Laravel backend URL
+            // return imageUrl;
+        },
     },
   };
   </script>
