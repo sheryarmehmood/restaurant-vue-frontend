@@ -43,26 +43,20 @@ export default {
       };
       axios.post(`${backendBaseUrl}/api/login`, credentials, { withCredentials: true })
         .then(response => {
-          // Check if the login was successful before redirecting
-      if (response.data.status) {
-        const token = response.data.token;
-        localStorage.setItem('token', token);
-        this.$router.push('/dishes');
-      } else {
-        this.errorMessage = response.data.message;
-        // Handle unsuccessful login (user not found or invalid credentials)
-        // console.error('Login failed:', response.data.message);
-        // You can display an error message to the user if needed
-      }
-          // const token = response.data.token;
-          // localStorage.setItem('token', token);
-          // this.$router.push('/dishes');
+         
+        if (response.data.status) {
+          const token = response.data.token;
+          localStorage.setItem('token', token);
+          this.$router.push('/dishes');
+        } else {
+          this.errorMessage = response.data.message;
+        }
+  
         })
         .catch(error => {
           console.error('Login failed:', error);
           this.errorMessage = error.response.data.error;
 
-          // this.errorMessage = 'An error occurred. Please try again.';
         });
     }
   }

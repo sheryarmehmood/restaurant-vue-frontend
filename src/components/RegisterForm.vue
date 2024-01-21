@@ -5,6 +5,11 @@
       <div class="card shadow-sm">
         <div class="card-body">
           <h5 class="card-title text-center mb-4">REGISTER</h5>
+          
+          <div v-if="errorMessage" class="alert alert-danger mt-3" role="alert">
+            <p v-for="(message, index) in errorMessage" :key="index">{{ message }}</p>
+          </div>
+
           <form @submit.prevent="register">
             <div class="form-group">
               <label for="name">Name</label>
@@ -45,7 +50,8 @@
         user_name: '',
         email: '',
         password: '',
-        confirm_password: ''
+        confirm_password: '',
+        errorMessage: null
       };
     },
     methods: {
@@ -60,10 +66,15 @@
 
       axios.post(`${backendBaseUrl}/api/register`, credentials, { withCredentials: true })
         .then(response => {
+          if (response.data.status) {
           console.log(response.data);
           this.$router.push('/');
+          }else {
+          this.errorMessage = response.data.message;
+        }
         })
         .catch(error => {
+          this.errorMessage = error.response.data.error;
           console.error('Login failed:', error);
         });
       }
