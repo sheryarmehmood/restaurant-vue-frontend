@@ -18,9 +18,7 @@
             <td>{{ dish.description }}</td>
             <td>
               <a :href="getFullImageUrl(dish.image_url)" target="_blank">
-      <img :src="getFullImageUrl(dish.image_url)" alt="Dish Image" style="max-width: 100px; max-height: 100px;">
-    </a>
-              <!-- <img :src="getFullImageUrl(dish.image_url)" alt="Dish Image" style="max-width: 100px; max-height: 100px;"> -->
+              <img :src="getFullImageUrl(dish.image_url)" alt="Dish Image" style="max-width: 100px; max-height: 100px;"></a>
             </td>
             <td>{{ dish.price }}</td>
           </tr>
@@ -62,6 +60,7 @@
   
   <script>
   import axios from 'axios';
+  import { backendBaseUrl } from '@/config/config';
 
   export default {
     data() {
@@ -74,7 +73,7 @@
       this.fetchDishes();
     },
     methods: {
-      fetchDishes(url = 'http://127.0.0.1:8000/api/get-dishes') {
+      fetchDishes(url = `${backendBaseUrl}/api/get-dishes`) {
         const token = localStorage.getItem('token');
 
         axios.get(url, {
@@ -82,36 +81,17 @@
           Authorization: `Bearer ${token}`,
         },
       })
-          .then(response => {
-            // console.log('response',response);
+          .then(response => {       
             this.dishes = response.data.data.data;
-            console.log('dishes', response.data.data.data);
-            this.links = response.data.data;
-            // console.log('this.links',this.links);
-            // console.log('response.data.data',response.data.data);
-
-
+            this.links = response.data.data;        
           })
           .catch(error => {
             console.error('Error fetching dishes:', error);
           });
       },
 
-        getFullImageUrl(imageUrl) {
-          console.log('imageUrl',imageUrl);
-            // Replace the base URL with the correct Laravel backend URL
-            // const laravelBaseUrl = 'http://localhost:8000';
-            // const vueBaseUrl = 'http://localhost:8081';
-
-            // // If the image URL contains the Vue.js base URL, replace it with the Laravel backend base URL
-            // if (imageUrl.includes(vueBaseUrl)) {
-            //     return imageUrl.replace(vueBaseUrl, laravelBaseUrl);
-            // }
-
-            return 'http://localhost:8000' + imageUrl;
-            // console.log('imageUrl',imageUrl);
-            // If the image URL doesn't contain the Vue.js base URL, assume it's already the correct Laravel backend URL
-            // return imageUrl;
+        getFullImageUrl(imageUrl) { 
+            return  backendBaseUrl + imageUrl;     
         },
     },
   };
@@ -119,6 +99,6 @@
   
   <style scoped>
   /* Add your styling here */
-  /* You can add custom styles for table, pagination, etc. */
+  
   </style>
   

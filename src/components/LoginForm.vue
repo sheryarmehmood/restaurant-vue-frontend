@@ -22,6 +22,7 @@
 
 <script>
 import axios from 'axios';
+import { backendBaseUrl } from '@/config/config';
 
 export default {
   data() {
@@ -36,22 +37,14 @@ export default {
         user_name: this.user_name,
         password: this.password
       };
-
-      // axios.post('/api/login', credentials)
-      axios.post('http://127.0.0.1:8000/api/login', credentials, { withCredentials: true })
+      axios.post(`${backendBaseUrl}/api/login`, credentials, { withCredentials: true })
         .then(response => {
-          console.log(response.data);
           const token = response.data.token;
-
-          // Save the token to local storage or wherever you prefer
           localStorage.setItem('token', token);
-
-          // Redirect to another route after successful login
           this.$router.push('/dishes');
         })
         .catch(error => {
           console.error('Login failed:', error);
-          // Handle login failure, show error message, etc.
         });
     }
   }

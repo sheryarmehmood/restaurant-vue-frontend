@@ -36,6 +36,7 @@
   
   <script>
   import axios from 'axios';
+  import { backendBaseUrl } from '@/config/config';
   
   export default {
     data() {
@@ -49,8 +50,6 @@
     },
     methods: {
       register() {
-        // Implement your registration logic using axios.post('/register', { ... })
-        // Similar to the login method in LoginForm.vue
         const credentials = {
         name: this.name,   
         email: this.email,  
@@ -59,21 +58,13 @@
         confirm_password: this.confirm_password,
       };
 
-      // axios.post('/api/login', credentials)
-      axios.post('http://127.0.0.1:8000/api/register', credentials, { withCredentials: true })
+      axios.post(`${backendBaseUrl}/api/register`, credentials, { withCredentials: true })
         .then(response => {
           console.log(response.data);
-        //   const token = response.data.token;
-// 
-          // Save the token to local storage or wherever you prefer
-        //   localStorage.setItem('token', token);
-
-          // Redirect to another route after successful login
           this.$router.push('/');
         })
         .catch(error => {
           console.error('Login failed:', error);
-          // Handle login failure, show error message, etc.
         });
       }
     }
