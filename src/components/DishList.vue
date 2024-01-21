@@ -1,6 +1,6 @@
 <template>
     <div class="container mt-5">
-      <h2 class="mb-2 text-start">Dishes</h2>
+      <h2 class="mb-2 text-start">Dishes</h2> 
   
       <!-- Display Dishes in a Table -->
       <table class="table table-striped">

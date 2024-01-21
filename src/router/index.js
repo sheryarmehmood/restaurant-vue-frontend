@@ -9,9 +9,8 @@ const routes = [
   {
     path: '/dishes',
     component: DishList,
-    meta: { requiresAuth: true }, // Add meta field for authentication
+    meta: { requiresAuth: true }, 
   },
-  // Add other routes as needed
 ];
 
 const router = createRouter({
