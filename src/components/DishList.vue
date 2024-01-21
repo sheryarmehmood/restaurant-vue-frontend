@@ -7,6 +7,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
+            <th>Key</th>
             <th>Name</th>
             <th>Description</th>
             <th>Image</th>
@@ -14,13 +15,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="dish in dishes" :key="dish.id">
+          <tr v-for="dish in dishes" :key="dish.id" style="height: 100px;">
+            <td>{{ dish.id }}</td>
             <td>{{ dish.name }}</td>
             <td>{{ dish.description }}</td>
             <td>
-              <a :href="getFullImageUrl(dish.image_url)" target="_blank">
-              <img :src="getFullImageUrl(dish.image_url)" alt="Dish Image" style="max-width: 100px; max-height: 100px;"></a>
-            </td>
+                <template v-if="!imageError[dish.id]">
+                  <a :href="getFullImageUrl(dish.image_url)" target="_blank">
+                    <img :src="getFullImageUrl(dish.image_url)" @error="handleImageError(dish.id)" style="max-width: 100px; max-height: 100px;">
+                  </a>
+                </template>
+                <template v-else>
+                  {{ dish.image_url }}
+                </template>
+              </td>
+
             <td>{{ dish.price }}</td>
           </tr>
         </tbody>
@@ -72,6 +81,7 @@
       return {
         dishes: [],
         links: [],
+        imageError: {},
       };
     },
     mounted() {
@@ -96,7 +106,14 @@
       },
 
         getFullImageUrl(imageUrl) { 
-            return  backendBaseUrl + imageUrl;     
+            
+            return  backendBaseUrl + imageUrl; 
+            
+        },
+
+        handleImageError(dishId) {
+            // This method is called when the image fails to load
+            this.$data.imageError[dishId] = true;
         },
     },
   };
@@ -104,6 +121,6 @@
   
   <style scoped>
   /* Add your styling here */
-  
+
   </style>
   
