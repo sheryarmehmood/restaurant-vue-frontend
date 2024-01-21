@@ -3,6 +3,9 @@
     <div class="card shadow-sm">
       <div class="card-body">
         <h5 class="card-title text-center mb-4">LOGIN</h5>
+        <div v-if="errorMessage" class="alert alert-danger mt-3" role="alert">
+            {{ errorMessage }}
+          </div>
         <form @submit.prevent="login">
           <div class="form-group">
             <label for="user_name">Username</label>
@@ -28,7 +31,8 @@ export default {
   data() {
     return {
       user_name: '',
-      password: ''
+      password: '',
+      errorMessage: null
     };
   },
   methods: {
@@ -39,12 +43,26 @@ export default {
       };
       axios.post(`${backendBaseUrl}/api/login`, credentials, { withCredentials: true })
         .then(response => {
-          const token = response.data.token;
-          localStorage.setItem('token', token);
-          this.$router.push('/dishes');
+          // Check if the login was successful before redirecting
+      if (response.data.status) {
+        const token = response.data.token;
+        localStorage.setItem('token', token);
+        this.$router.push('/dishes');
+      } else {
+        this.errorMessage = response.data.message;
+        // Handle unsuccessful login (user not found or invalid credentials)
+        // console.error('Login failed:', response.data.message);
+        // You can display an error message to the user if needed
+      }
+          // const token = response.data.token;
+          // localStorage.setItem('token', token);
+          // this.$router.push('/dishes');
         })
         .catch(error => {
           console.error('Login failed:', error);
+          this.errorMessage = error.response.data.error;
+
+          // this.errorMessage = 'An error occurred. Please try again.';
         });
     }
   }
