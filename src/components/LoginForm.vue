@@ -35,6 +35,10 @@ export default {
       errorMessage: null
     };
   },
+  mounted() {
+    // Remove token from localStorage when the component is mounted
+    localStorage.removeItem('token');
+  },
   methods: {
     login() {
       const credentials = {
