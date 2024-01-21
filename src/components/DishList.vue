@@ -1,4 +1,5 @@
 <template>
+  <TopNav/>
     <div class="container mt-5">
       <h2 class="mb-2 text-start">Dishes</h2> 
   
@@ -61,8 +62,12 @@
   <script>
   import axios from 'axios';
   import { backendBaseUrl } from '@/config/config';
+  import TopNav from '@/components/layouts/TopNav.vue';
 
   export default {
+    components: {
+    TopNav, // Register the Header component
+  },
     data() {
       return {
         dishes: [],
