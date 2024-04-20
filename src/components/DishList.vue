@@ -10,7 +10,7 @@
             <th>Key</th>
             <th>Name</th>
             <th>Description</th>
-            <th>Image</th>
+            <th>Images</th>
             <th>Price</th>
           </tr>
         </thead>
