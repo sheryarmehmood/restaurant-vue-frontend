@@ -20,7 +20,7 @@
               <input type="email" v-model="email" class="form-control" id="email" required>
             </div>
             <div class="form-group">
-              <label for="user_name">Username</label>
+              <label for="user_name">Register Username</label>
               <input type="text" v-model="user_name" class="form-control" id="user_name" required>
             </div>
             <div class="form-group">
