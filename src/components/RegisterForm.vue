@@ -24,7 +24,7 @@
               <input type="text" v-model="user_name" class="form-control" id="user_name" required>
             </div>
             <div class="form-group">
-              <label for="password">Password</label>
+              <label for="password">Register Password</label>
               <input type="password" v-model="password" class="form-control" id="password" required>
             </div>
             <div class="form-group">
