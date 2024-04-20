@@ -7,8 +7,8 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Key</th>
-            <th>Name</th>
+            <th>Keys</th>
+            <th>Names</th>
             <th>Description</th>
             <th>Images</th>
             <th>Price</th>
