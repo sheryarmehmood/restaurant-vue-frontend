@@ -4,7 +4,7 @@
     <div class="register-container">
       <div class="card shadow-sm">
         <div class="card-body">
-          <h5 class="card-title text-center mb-4">REGISTER</h5>
+          <h5 class="card-title text-center mb-4">REGISTER Form</h5>
           
           <div v-if="errorMessage" class="alert alert-danger mt-3" role="alert">
             <p v-for="(message, index) in errorMessage" :key="index">{{ message }}</p>
