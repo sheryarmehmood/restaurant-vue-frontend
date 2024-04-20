@@ -12,7 +12,7 @@
             <input type="text" v-model="user_name" class="form-control" id="user_name" required>
           </div>
           <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password">Login Password</label>
             <input type="password" v-model="password" class="form-control" id="password" required>
           </div>
           <button type="submit" class="btn btn-primary btn-block">Login</button>
